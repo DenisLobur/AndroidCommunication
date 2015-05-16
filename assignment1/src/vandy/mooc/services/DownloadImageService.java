@@ -76,7 +76,7 @@ public class DownloadImageService extends IntentService {
     	// the directory pathname as an "extra" to the intent
         // to tell the Service where to place the image within
         // external storage.
-        Intent intent = new Intent();
+        Intent intent = new Intent(context, DownloadImageService.class);
         intent.setData(url);
         intent.putExtra(REQUEST_CODE, requestCode);
         Messenger messenger = new Messenger(downloadHandler);
@@ -196,9 +196,9 @@ public class DownloadImageService extends IntentService {
         // Put the path to the image file into the Bundle via the
         // IMAGE_PATHNAME key only if the download succeeded.
         // @@ TODO -- you fill in here.
-        if(isSuccess) {
+       // if(isSuccess) {
             bundle.putParcelable(IMAGE_PATHNAME, pathToImageFile);
-        }
+        //}
 
         // Set the Bundle to be the data in the message.
         // @@ TODO -- you fill in here.
