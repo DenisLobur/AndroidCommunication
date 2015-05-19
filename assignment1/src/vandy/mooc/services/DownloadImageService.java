@@ -1,6 +1,5 @@
 package vandy.mooc.services;
 
-import android.app.Activity;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
@@ -191,14 +190,14 @@ public class DownloadImageService extends IntentService {
         // Return the result to indicate whether the download
         // succeeded or failed.
         // @@ TODO -- you fill in here.
-        boolean isSuccess = Activity.RESULT_OK == getResultCode(message);
+        boolean isSuccess = getResultCode(message) == 0;
 
         // Put the path to the image file into the Bundle via the
         // IMAGE_PATHNAME key only if the download succeeded.
         // @@ TODO -- you fill in here.
-       // if(isSuccess) {
+        if(isSuccess) {
             bundle.putParcelable(IMAGE_PATHNAME, pathToImageFile);
-        //}
+        }
 
         // Set the Bundle to be the data in the message.
         // @@ TODO -- you fill in here.
