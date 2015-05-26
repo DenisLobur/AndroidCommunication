@@ -1,18 +1,17 @@
 package vandy.mooc.services;
 
-import java.lang.ref.WeakReference;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import vandy.mooc.utils.ReplyMessage;
-import vandy.mooc.utils.RequestMessage;
-import vandy.mooc.utils.Utils;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
-import android.os.RemoteException;
 import android.util.Log;
+import vandy.mooc.utils.ReplyMessage;
+import vandy.mooc.utils.RequestMessage;
+
+import java.lang.ref.WeakReference;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * This class handles messages sent from an Activity in a pool of
@@ -62,10 +61,10 @@ class RequestHandler extends Handler {
 
         // Get the reply Messenger.
         // TODO -- you fill in here.
-
+        Messenger messenger = requestMessage.getMessenger();
         // Get the URL associated with the message data.
         // TODO -- you fill in here.
-
+        Bundle bundle = message.getData();
         // Get the directory pathname where the image will be stored.
         // TODO -- you fill in here.
 
@@ -94,6 +93,7 @@ class RequestHandler extends Handler {
 
         // Execute the downloadImageAndReply Runnable to download the
         // image and reply.
+        mExecutorService.execute(downloadImageAndReply);
         // TODO -- you fill in here.
     }
 
@@ -108,7 +108,7 @@ class RequestHandler extends Handler {
         // Call the makeReplyMessage() factory method to create
         // Message.
         // TODO -- you fill in here.
-
+        ReplyMessage replyMessage = ReplyMessage.makeReplyMessage(Message.obtain());
         try {
             Log.d(TAG,
                   "sending "
@@ -117,6 +117,9 @@ class RequestHandler extends Handler {
 
             // Send the replyMessage back to the Activity.
             // TODO -- you fill in here.
+            replyMessage.setImageURL(url);
+            replyMessage.setRequestCode(requestCode);
+            replyMessage.setMessenger(messenger);
         } catch (Exception e) {
             Log.e(getClass().getName(),
                   "Exception while sending reply message back to Activity.",
@@ -129,7 +132,8 @@ class RequestHandler extends Handler {
      */
     public void shutdown() {
         // Immediately shutdown the ExecutorService.
-        // TODO -- you fill in here.        
+        // TODO -- you fill in here.
+        mExecutorService.shutdownNow();
     }
 }
 

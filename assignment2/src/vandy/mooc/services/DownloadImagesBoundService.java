@@ -33,7 +33,8 @@ public class DownloadImagesBoundService extends LifecycleLoggingService {
         // Create an intent that will download the image from the web.
     	// TODO -- you fill in here, replacing null with the proper
     	// code.
-        return null;
+        Intent intent = new Intent();
+        return intent;
     }
 
     /**
@@ -70,5 +71,6 @@ public class DownloadImagesBoundService extends LifecycleLoggingService {
 
         // Shutdown the RequestHandler.
     	// TODO -- you fill in here.
+        mRequestHandler.shutdown();
     }
 }

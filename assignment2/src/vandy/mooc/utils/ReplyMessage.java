@@ -1,6 +1,5 @@
 package vandy.mooc.utils;
 
-import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
@@ -40,23 +39,24 @@ public class ReplyMessage extends RequestReplyMessageBase {
 
         // Create a new Bundle to handle the result.
         // TODO -- you fill in here.
-
+        Bundle bundle = new Bundle();
         // Set the Bundle to be the data in the message.
         // TODO -- you fill in here.
-
+        replyMessage.setData(bundle);
         // Put the URL to the image file into the Bundle
         // TODO -- you fill in here.
-
+        bundle.putParcelable(IMAGE_URL, url);
         // Put the requestCode into the Bundle
         // TODO -- you fill in here.
-
+        bundle.putInt(REQUEST_CODE, requestCode);
         // Set the result code to indicate whether the download
         // succeeded or failed.
         // TODO -- you fill in here.
-
+        int resultCode = replyMessage.getResultCode();
         // Put the path to the image file into the Bundle
         // only if the download succeeded.
         // TODO -- you fill in here.
+        bundle.putParcelable(IMAGE_PATHNAME, pathToImageFile);
 
         return replyMessage;
     }
