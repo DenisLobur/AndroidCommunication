@@ -38,8 +38,7 @@
     </activity>
     
     <service
-       android:name=".services.DownloadImagesBoundService"
-       android:process=":remote"> 
+       android:name=".services.DownloadImagesBoundService">
     </service>
 
   </application>

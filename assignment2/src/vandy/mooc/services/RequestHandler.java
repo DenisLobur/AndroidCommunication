@@ -1,6 +1,7 @@
 package vandy.mooc.services;
 
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
@@ -64,7 +65,8 @@ class RequestHandler extends Handler {
         final Messenger replyMessenger = requestMessage.getMessage().replyTo;
         // Get the URL associated with the message data.
         // TODO -- you fill in here.
-        final Uri url = requestMessage.getImageURL();
+        Bundle bundle = message.getData();
+        final Uri url = requestMessage.getImageURL(bundle);
         // Get the directory pathname where the image will be stored.
         // TODO -- you fill in here.
         final String directoryPathName = requestMessage.getDirectoryPathname();
@@ -110,7 +112,7 @@ class RequestHandler extends Handler {
         // Call the makeReplyMessage() factory method to create
         // Message.
         // TODO -- you fill in here.
-        ReplyMessage replyMessage = ReplyMessage.makeReplyMessage(Message.obtain());
+        ReplyMessage replyMessage = ReplyMessage.makeReplyMessage(pathToImageFile, url, requestCode);
         try {
             Log.d(TAG,
                   "sending "
@@ -119,9 +121,7 @@ class RequestHandler extends Handler {
 
             // Send the replyMessage back to the Activity.
             // TODO -- you fill in here.
-            replyMessage.setImageURL(url);
-            replyMessage.setRequestCode(requestCode);
-            replyMessage.setMessenger(messenger);
+            messenger.send(replyMessage.getMessage());
         } catch (Exception e) {
             Log.e(getClass().getName(),
                   "Exception while sending reply message back to Activity.",

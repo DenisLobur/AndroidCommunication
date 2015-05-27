@@ -110,7 +110,7 @@ public class ImageOpsBoundService extends ImageOpsImpl {
             Log.d(TAG, "calling unbindService()");
             // Unbind from the Service.
             // TODO -- you fill in here.
-            unbindService();
+            mActivity.get().unbindService(mServiceConnection);
             // Set this field to null to trigger a call to
             // bindService() next time bindService() is called.
             // TODO -- you fill in here.
