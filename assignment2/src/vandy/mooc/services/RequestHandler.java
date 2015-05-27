@@ -1,13 +1,13 @@
 package vandy.mooc.services;
 
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
 import vandy.mooc.utils.ReplyMessage;
 import vandy.mooc.utils.RequestMessage;
+import vandy.mooc.utils.Utils;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.ExecutorService;
@@ -61,17 +61,17 @@ class RequestHandler extends Handler {
 
         // Get the reply Messenger.
         // TODO -- you fill in here.
-        Messenger messenger = requestMessage.getMessenger();
+        final Messenger replyMessenger = requestMessage.getMessage().replyTo;
         // Get the URL associated with the message data.
         // TODO -- you fill in here.
-        Bundle bundle = message.getData();
+        final Uri url = requestMessage.getImageURL();
         // Get the directory pathname where the image will be stored.
         // TODO -- you fill in here.
-
+        final String directoryPathName = requestMessage.getDirectoryPathname();
         // Get the requestCode for the operation that was invoked by
         // the Activity.
         // TODO -- you fill in here.
-
+        final int requestCode = requestMessage.getRequestCode();
         // A Runnable that downloads the image, stores it in a file,
         // and sends the path to the file back to the Activity.
         final Runnable downloadImageAndReply = 
@@ -83,18 +83,20 @@ class RequestHandler extends Handler {
                 public void run() {
                     // Download and store the requested image.
                     // TODO -- you fill in here.
+                    Uri downloadedUrl = Utils.downloadImage(mService.get(), url, directoryPathName);
 
                     // Send the path to the image file, url, and
                     // requestCode back to the Activity via the
                     // replyMessenger.
                     // TODO -- you fill in here.
+                    sendPath(replyMessenger, url, downloadedUrl, requestCode);
                 }
             };
 
         // Execute the downloadImageAndReply Runnable to download the
         // image and reply.
-        mExecutorService.execute(downloadImageAndReply);
         // TODO -- you fill in here.
+        mExecutorService.execute(downloadImageAndReply);
     }
 
     /**
