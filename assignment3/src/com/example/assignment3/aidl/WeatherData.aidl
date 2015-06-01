@@ -1,4 +1,4 @@
-package vandy.mooc.com.example.assignment3.activities.aidl;
+package com.example.assignment3.aidl;
 
 /**
  * AIDL definition for the WeatherData class, which the AIDL compiler

@@ -1,6 +1,6 @@
-package vandy.mooc.com.example.assignment3.activities.aidl;
+package com.example.assignment3.aidl;
 
-import vandy.mooc.com.example.assignment3.activities.aidl.WeatherData;
+import com.example.assignment3.aidl.WeatherData;
 import java.util.List;
 
 /**

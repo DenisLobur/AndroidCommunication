@@ -1,6 +1,6 @@
-package vandy.mooc.com.example.assignment3.activities.aidl;
+package com.example.assignment3.aidl;
 
-import vandy.mooc.com.example.assignment3.activities.aidl.WeatherResults;
+import com.example.assignment3.aidl.WeatherResults;
 
 /**
  * Interface defining the method implemented within
