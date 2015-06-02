@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import com.example.assignment3.R;
@@ -47,6 +48,9 @@ public class WeatherOpsImpl implements WeatherOps {
      * Weather entered by the user.
      */
     protected WeakReference<EditText> mEditText;
+
+    protected WeakReference<Button> loadSync;
+    protected WeakReference<Button> loadAsync;
 
     /**
      * List of results to display (if any).
@@ -156,14 +160,23 @@ public class WeatherOpsImpl implements WeatherOps {
 
         // Store the EditText that holds the urls entered by the user
         // (if any).
-        //TODO: finish later
-        /*mEditText = new WeakReference<>
-            ((EditText) mActivity.get().findViewById(R.id.editText1));*/
+        mEditText = new WeakReference<>
+            ((EditText) mActivity.get().findViewById(R.id.enter_city));
+
+        loadSync = new WeakReference<>((Button) mActivity.get().findViewById(R.id.load_sync));
+        loadAsync = new WeakReference<>((Button) mActivity.get().findViewById(R.id.load_async));
+        loadSync.get().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expandWeatherSync(v);
+            }
+        });
+
 
         // Store the ListView for displaying the results entered.
         //TODO: finish later
         /*mListView = new WeakReference<>
-            ((ListView) mActivity.get().findViewById(R.id.listView1))*/;
+            ((ListView) mActivity.get().findViewById(R.id.listView1));*/
 
         // Create a local instance of our custom Adapter for our
         // ListView.
@@ -171,7 +184,7 @@ public class WeatherOpsImpl implements WeatherOps {
             (new WeatherDataArrayAdapter(mActivity.get()));
 
         // Set the adapter to the ListView.
-        mListView.get().setAdapter(mAdapter.get());
+        /*mListView.get().setAdapter(mAdapter.get());*/
 
         // Display results if any (due to runtime configuration change).
         if (mResults != null)
@@ -266,7 +279,7 @@ public class WeatherOpsImpl implements WeatherOps {
 
         if (WeatherRequest != null) {
             // Get the Weather entered by the user.
-            final String Weather =
+            final String weather =
                 mEditText.get().getText().toString();
 
             resetDisplay();
@@ -277,7 +290,7 @@ public class WeatherOpsImpl implements WeatherOps {
                 // sendResults() method of the mWeatherResults
                 // callback object, which runs in a Thread from the
                 // Thread pool managed by the Binder framework.
-                WeatherRequest.getCurrentWeather(Weather,
+                WeatherRequest.getCurrentWeather(weather,
                         mWeatherResults);
             } catch (RemoteException e) {
                 Log.e(TAG,
@@ -300,7 +313,7 @@ public class WeatherOpsImpl implements WeatherOps {
 
         if (WeatherCall != null) {
             // Get the Weather entered by the user.
-            final String Weather =
+            final String weather =
                 mEditText.get().getText().toString();
 
             resetDisplay();
@@ -319,9 +332,9 @@ public class WeatherOpsImpl implements WeatherOps {
                  * synchronous two-way method call, which runs in a
                  * background thread to avoid blocking the UI thread.
                  */
-                protected List<WeatherData> doInBackground(String... Weathers) {
+                protected List<WeatherData> doInBackground(String... weathers) {
                     try {
-                        mWeather = Weathers[0];
+                        mWeather = weathers[0];
                         return WeatherCall.getCurrentWeather(mWeather);
                     } catch (RemoteException e) {
                         e.printStackTrace();
@@ -343,7 +356,7 @@ public class WeatherOpsImpl implements WeatherOps {
                 }
                 // Execute the AsyncTask to expand the Weather without
                 // blocking the caller.
-            }.execute(Weather);
+            }.execute(weather);
         } else {
             Log.d(TAG, "mWeatherCall was null.");
         }
@@ -371,7 +384,7 @@ public class WeatherOpsImpl implements WeatherOps {
         Utils.hideKeyboard(mActivity.get(),
                            mEditText.get().getWindowToken());
         mResults = null;
-        mAdapter.get().clear();
-        mAdapter.get().notifyDataSetChanged();
+        //mAdapter.get().clear();
+        //mAdapter.get().notifyDataSetChanged();
     }
 }

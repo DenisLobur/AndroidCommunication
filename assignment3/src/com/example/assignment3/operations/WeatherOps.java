@@ -10,28 +10,28 @@ public interface WeatherOps {
     /**
      * Initiate the service binding protocol.
      */
-    public void bindService();
+    void bindService();
 
     /**
      * Initiate the service unbinding protocol.
      */
-    public void unbindService();
+    void unbindService();
 
     /*
      * Initiate the synchronous Weather lookup when the user presses
      * the "Look Up Sync" button.
      */
-    public void expandWeatherSync(View v);
+    void expandWeatherSync(View v);
 
     /*
      * Initiate the asynchronous Weather lookup when the user presses
      * the "Look Up Async" button.
      */
-    public void expandWeatherAsync(View v);
+    void expandWeatherAsync(View v);
 
     /**
      * Called after a runtime configuration change occurs to finish
      * the initialization steps.
      */
-    public void onConfigurationChange(WeatherActivity activity);
+    void onConfigurationChange(WeatherActivity activity);
 }
