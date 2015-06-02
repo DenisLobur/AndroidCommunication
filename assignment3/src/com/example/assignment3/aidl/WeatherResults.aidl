@@ -15,4 +15,10 @@ interface WeatherResults {
      * one-way WeatherRequest.getCurrentWeather() call.
      */
     oneway void sendResults(in List<WeatherData> results);
+
+    /**
+         * This one-way (non-blocking) method allows AcyronymServiceAsync
+         * to return an error String if the Service fails for some reason.
+         */
+    oneway void sendError(in String reason);
 }
