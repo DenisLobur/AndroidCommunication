@@ -1,10 +1,9 @@
 package com.example.assignment3.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import com.example.assignment3.R;
 
-public class WeatherActivity extends Activity {
+public class WeatherActivity extends LifecycleLoggingActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
