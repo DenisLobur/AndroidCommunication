@@ -23,6 +23,7 @@ public class JsonWeather {
     final public static String base_JSON = "base";
     final public static String weather_JSON = "weather";
     final public static String sys_JSON = "sys";
+    final public static String coord_JSON = "coord";
 
     /**
      * Various fields corresponding to data downloaded in Json from
