@@ -1,9 +1,12 @@
 package com.example.assignment3.jsonweather;
 
 import android.util.JsonReader;
+import android.util.JsonToken;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,18 +27,71 @@ public class WeatherJSONParser {
     public List<JsonWeather> parseJsonStream(InputStream inputStream)
         throws IOException {
         // TODO -- you fill in here.
-        return null;
+        try (JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"))){
+
+            return parseJsonWeatherObjectForm(reader);
+        }
     }
 
     /**
      * Parse a Json stream and convert it into a List of JsonWeather
      * objects.
      */
-    public List<JsonWeather> parseJsonWeatherArray(JsonReader reader)
+    public List<JsonWeather> parseJsonWeatherArrayForm(JsonReader reader)
         throws IOException {
-
         // TODO -- you fill in here.
-        return null;
+        reader.beginArray();
+        try {
+            if (reader.peek() == JsonToken.END_ARRAY) {
+                return null;
+            } else {
+                return parseJsonWeatherObjectForm(reader);
+            }
+        } finally {
+            reader.endArray();
+        }
+    }
+
+    private List<JsonWeather> parseJsonWeatherObjectForm(JsonReader reader) throws IOException {
+        List <JsonWeather> weathers = null;
+        reader.beginObject();
+
+        try {
+            outerloop:
+            while (reader.hasNext()){
+                String name = reader.nextName();
+                switch (name) {
+                    case JsonWeather.sys_JSON:
+                        JsonWeather w = new JsonWeather();
+                        w.setSys(parseSys(reader));
+                        weathers.set(0, w);
+                        break;
+                    default:
+                        reader.skipValue();
+                        break;
+                }
+            }
+        }finally {
+            reader.endObject();
+        }
+
+        return weathers;
+    }
+
+    private List<JsonWeather> parseWeatherArrayForm(JsonReader reader)
+            throws IOException {
+        reader.beginArray();
+
+        try {
+            List<JsonWeather> weathers = new ArrayList<JsonWeather>();
+
+            while (reader.hasNext())
+                weathers.add(parseJsonWeather(reader));
+
+            return weathers;
+        } finally {
+            reader.endArray();
+        }
     }
 
     /**
@@ -84,8 +140,34 @@ public class WeatherJSONParser {
     /**
      * Parse a Json stream and return a Sys Object.
      */
-    public Sys parseSys(JsonReader reader){
+    public Sys parseSys(JsonReader reader) throws IOException {
         // TODO -- you fill in here.
-        return null;
+        reader.beginObject();
+        Sys sys = new Sys();
+        try {
+            while (reader.hasNext()) {
+                String name = reader.nextName();
+                switch (name) {
+                    case Sys.country_JSON:
+                        sys.setCountry(reader.nextString());
+                        break;
+                    case Sys.message_JSON:
+                        sys.setMessage(reader.nextDouble());
+                        break;
+                    case Sys.sunrise_JSON:
+                        sys.setSunrise(reader.nextLong());
+                        break;
+                    case Sys.sunset_JSON:
+                        sys.setSunset(reader.nextLong());
+                        break;
+                    default:
+                        reader.skipValue();
+                }
+            }
+        } finally {
+            reader.endObject();
+        }
+
+        return sys;
     }
 }
