@@ -2,7 +2,7 @@
 
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: /media/denis/work/projects/CourseraCommunication/InIdea/assignment3/src/com/example/assignment3/aidl/WeatherCall.aidl
+ * Original file: /home/denis/IdeaProjects/myGit/AndroidCommunication/assignment3/src/com/example/assignment3/aidl/WeatherCall.aidl
  */
 package com.example.assignment3.aidl;
 /**

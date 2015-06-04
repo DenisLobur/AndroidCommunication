@@ -32,78 +32,101 @@
 
     <LinearLayout
             android:id="@+id/sunrise_set_holder"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/country"
-            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/pic"
             android:orientation="horizontal">
 
-        <TextView
-                android:id="@+id/sunrise_label"
-                android:layout_width="wrap_content"
+        <LinearLayout
+                android:id="@+id/sunrise_holder"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="sunrise"
-                android:textColor="#006608"/>
+                android:orientation="vertical"
+                android:gravity="center"
+                >
 
-        <TextView
-                android:id="@+id/sunset_label"
-                android:layout_width="wrap_content"
+                <TextView
+                        android:id="@+id/sunrise_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="sunrise"
+                        android:textColor="#006608"/>
+
+                <TextView
+                        android:id="@+id/sunrise_val"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="100"
+                        android:textColor="#006608"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/sunset_holder"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="sunset"
-                android:layout_marginLeft="20dp"
-                android:textColor="#006608"/>
+                android:orientation="vertical"
+                android:layout_toRightOf="@id/sunrise_holder"
+                android:gravity="center">
+
+                <TextView
+                        android:id="@+id/sunset_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="sunset"
+                        android:textColor="#006608"/>
+
+                <TextView
+                        android:id="@+id/sunset_val"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="200"
+                        android:textColor="#006608"/>
+
+                </LinearLayout>
+
+
+
 
 
     </LinearLayout>
 
     <LinearLayout
-            android:id="@+id/sunrise_set_val"
-            android:layout_width="wrap_content"
+            android:id="@+id/descr_holder"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/sunrise_set_holder"
-            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/pic"
+            android:gravity="center"
+            android:layout_below="@id/pic">
 
-            android:orientation="horizontal">
+            <TextView
+                    android:id="@+id/main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="main"
+                    android:layout_alignParentRight="true"
+                    />
 
-        <TextView
-                android:id="@+id/sunrise"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="100"
-                android:textColor="#006608"/>
-
-        <TextView
-                android:id="@+id/sunset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="200"
-                android:layout_marginLeft="20dp"
-                android:textColor="#006608"/>
-
+            <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="description"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/main"/>
 
     </LinearLayout>
 
-    <TextView
-            android:id="@+id/main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="main"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/sunrise_set_val"/>
 
-    <TextView
-            android:id="@+id/description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="description"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/main"/>
 
 
 
