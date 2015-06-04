@@ -2,6 +2,7 @@ package com.example.assignment3.jsonweather;
 
 import android.util.JsonReader;
 import android.util.JsonToken;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,7 +56,7 @@ public class WeatherJSONParser {
     private List<JsonWeather> parseJsonWeatherObjectForm(JsonReader reader) throws IOException {
         List <JsonWeather> weathers = new ArrayList<>();
         try {
-            while (reader.hasNext()){
+            //while (reader.hasNext()){
 //                String name = reader.nextName();
 //                switch (name) {
 //                    case JsonWeather.coord_JSON:
@@ -63,12 +64,15 @@ public class WeatherJSONParser {
 //                        break;
 //                }
 //                if (reader.peek() == JsonToken.BEGIN_OBJECT) {
-                    weathers.add(parseJsonWeather(reader));
-//                }
+            if(reader.peek() == JsonToken.END_DOCUMENT) {
+                return null;
             }
+            weathers.add(parseJsonWeather(reader));
+//                }
+           // }
             return weathers;
         } finally {
-            reader.endObject();
+            Log.d(TAG, "finish parsing from JSON");
         }
     }
 
@@ -110,7 +114,7 @@ public class WeatherJSONParser {
                         }
                         break;
                     case JsonWeather.base_JSON:
-                        reader.nextString();
+                        weather.setBase(reader.nextString());
                         break;
                     case JsonWeather.main_JSON:
                         weather.setMain(parseMain(reader));
@@ -119,16 +123,16 @@ public class WeatherJSONParser {
                         weather.setWind(parseWind(reader));
                         break;
                     case JsonWeather.dt_JSON:
-                        reader.nextInt();
+                        weather.setDt(reader.nextInt());
                         break;
                     case JsonWeather.id_JSON:
-
+                        weather.setId(reader.nextLong());
                         break;
                     case JsonWeather.name_JSON:
-
+                        weather.setName(reader.nextString());
                         break;
                     case JsonWeather.cod_JSON:
-
+                        weather.setCod(reader.nextLong());
                         break;
                     default:
                         reader.skipValue();

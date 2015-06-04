@@ -44,6 +44,17 @@ public class WeatherData implements Parcelable {
     private long mHumidity;
     private long mSunrise;
     private long mSunset;
+    private String mCountry;
+    private String mMain;
+    private String mDescription;
+    private String mIcon;
+    private double mTempMin;
+    private double mTempMax;
+    private double mPressure;
+    private double mSeaLevel;
+    private double mGroundLevel;
+    private long mCod;
+    private long mId;
 
     /**
      * Constructor
@@ -62,7 +73,18 @@ public class WeatherData implements Parcelable {
                        double temp,
                        long humidity,
                        long sunrise,
-                       long sunset) {
+                       long sunset,
+                       String country,
+                       String main,
+                       String description,
+                       String icon,
+                       double tempMin,
+                       double tempMax,
+                       double pressure,
+                       double seaLevel,
+                       double groundLevel,
+                       long cod,
+                       long id) {
         mName = name;
         mSpeed = speed;
         mDeg = deg;
@@ -70,6 +92,18 @@ public class WeatherData implements Parcelable {
         mHumidity = humidity;
         mSunrise = sunrise;
         mSunset = sunset;
+        mCountry = country;
+        mMain = main;
+        mDescription = description;
+        mIcon = icon;
+        mTempMin = tempMin;
+        mTempMax = tempMax;
+        mPressure = pressure;
+        mSeaLevel = seaLevel;
+        mGroundLevel = groundLevel;
+        mCod = cod;
+        mId = id;
+
     }
 
     /**
@@ -83,7 +117,19 @@ public class WeatherData implements Parcelable {
                 + ", temp=" + mTemp
                 + ", humidity=" + mHumidity
                 + ", sunrise=" + mSunrise
-                + ", sunset=" + mSunset + "]";
+                + ", sunset=" + mSunset
+                + ", country=" + mCountry
+                + ", main=" + mMain
+                + ", description=" + mDescription
+                + ", icon=" + mIcon
+                + ", tempMin=" + mTempMin
+                + ", tempMax=" + mTempMax
+                + ", pressure=" + mPressure
+                + ", seaLevel=" + mSeaLevel
+                + ", groundLevel=" + mGroundLevel
+                + ", cod=" + mCod
+                + ", id=" + mId
+                + "]";
     }
 
     /*
@@ -111,6 +157,17 @@ public class WeatherData implements Parcelable {
         dest.writeLong(mHumidity);
         dest.writeLong(mSunrise);
         dest.writeLong(mSunset);
+        dest.writeString(mCountry);
+        dest.writeString(mMain);
+        dest.writeString(mDescription);
+        dest.writeString(mIcon);
+        dest.writeDouble(mTempMin);
+        dest.writeDouble(mTempMax);
+        dest.writeDouble(mPressure);
+        dest.writeDouble(mSeaLevel);
+        dest.writeDouble(mGroundLevel);
+        dest.writeLong(mCod);
+        dest.writeLong(mId);
     }
 
     /**
@@ -130,6 +187,17 @@ public class WeatherData implements Parcelable {
         mHumidity = in.readLong();
         mSunrise = in.readLong();
         mSunset = in.readLong();
+        mCountry = in.readString();
+        mMain = in.readString();
+        mDescription = in.readString();
+        mIcon = in.readString();
+        mTempMin = in.readDouble();
+        mTempMax = in.readDouble();
+        mPressure = in.readDouble();
+        mSeaLevel = in.readDouble();
+        mGroundLevel = in.readDouble();
+        mCod = in.readLong();
+        mId = in.readLong();
     }
 
     /**

@@ -19,6 +19,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activities.DisplayActivity"/>
+
         <service android:name=".services.WeatherServiceSync"/>
 
         <service android:name=".services.WeatherServiceAsync"/>

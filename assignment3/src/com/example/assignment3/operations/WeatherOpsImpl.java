@@ -1,6 +1,7 @@
 package com.example.assignment3.operations;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.RemoteException;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import com.example.assignment3.R;
+import com.example.assignment3.activities.DisplayActivity;
 import com.example.assignment3.activities.WeatherActivity;
 import com.example.assignment3.aidl.WeatherCall;
 import com.example.assignment3.aidl.WeatherData;
@@ -22,6 +24,7 @@ import com.example.assignment3.utils.Utils;
 import com.example.assignment3.utils.WeatherDataArrayAdapter;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -169,6 +172,8 @@ public class WeatherOpsImpl implements WeatherOps {
             @Override
             public void onClick(View v) {
                 expandWeatherSync(v);
+                //Intent intent = new Intent(mActivity.get(), DisplayActivity.class);
+                //mActivity.get().startActivity(intent);
             }
         });
 
@@ -372,9 +377,12 @@ public class WeatherOpsImpl implements WeatherOps {
         mResults = results;
 
         // Set/change data set.
-        mAdapter.get().clear();
-        mAdapter.get().addAll(mResults);
-        mAdapter.get().notifyDataSetChanged();
+        //mAdapter.get().clear();
+        //mAdapter.get().addAll(mResults);
+        //mAdapter.get().notifyDataSetChanged();
+        Intent intent = new Intent(mActivity.get(), DisplayActivity.class);
+        intent.putParcelableArrayListExtra("par", (ArrayList<WeatherData>)mResults);
+        mActivity.get().startActivity(intent);
     }
 
     /**

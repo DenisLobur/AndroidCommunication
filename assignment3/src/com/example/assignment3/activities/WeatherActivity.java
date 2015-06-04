@@ -27,7 +27,7 @@ public class WeatherActivity extends LifecycleLoggingActivity implements View.On
         
         mWeatherOps = new WeatherOpsImpl(this);
         
-        setContentView(R.layout.main);
+        //setContentView(R.layout.main);
 
         /*editText = (EditText) findViewById(R.id.enter_city);
         loadSync = (Button) findViewById(R.id.load_sync);

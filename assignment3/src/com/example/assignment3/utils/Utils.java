@@ -86,7 +86,18 @@ public class Utils {
                         jsonWeather.getMain().getTemp(),
                         jsonWeather.getMain().getHumidity(),
                         jsonWeather.getSys().getSunrise(),
-                        jsonWeather.getSys().getSunset()));
+                        jsonWeather.getSys().getSunset(),
+                        jsonWeather.getSys().getCountry(),
+                        jsonWeather.getWeather().get(0).getMain(),
+                        jsonWeather.getWeather().get(0).getDescription(),
+                        jsonWeather.getWeather().get(0).getIcon(),
+                        jsonWeather.getMain().getTempMin(),
+                        jsonWeather.getMain().getTempMax(),
+                        jsonWeather.getMain().getPressure(),
+                        jsonWeather.getMain().getSeaLevel(),
+                        jsonWeather.getMain().getGrndLevel(),
+                        jsonWeather.getCod(),
+                        jsonWeather.getId()));
              // Return the List of WeatherData.
              return returnList;
         }  else
