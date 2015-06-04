@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.RemoteException;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 import com.example.assignment3.R;
 import com.example.assignment3.activities.DisplayActivity;
 import com.example.assignment3.activities.WeatherActivity;
@@ -177,6 +179,14 @@ public class WeatherOpsImpl implements WeatherOps {
             }
         });
 
+        loadAsync.get().setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                expandWeatherAsync(v);
+            }
+        });
+
 
         // Store the ListView for displaying the results entered.
         //TODO: finish later
@@ -319,7 +329,8 @@ public class WeatherOpsImpl implements WeatherOps {
         if (WeatherCall != null) {
             // Get the Weather entered by the user.
             final String weather =
-                mEditText.get().getText().toString();
+                checkEmptyCity(mEditText.get().getText().toString());
+
 
             resetDisplay();
 
@@ -364,6 +375,15 @@ public class WeatherOpsImpl implements WeatherOps {
             }.execute(weather);
         } else {
             Log.d(TAG, "mWeatherCall was null.");
+        }
+    }
+
+    private String checkEmptyCity (String city){
+        if (!TextUtils.isEmpty(city)) {
+            return city;
+        } else {
+            Toast.makeText(mActivity.get(), "Enter a city", Toast.LENGTH_SHORT).show();
+            return "aaaaaaaaa";
         }
     }
 

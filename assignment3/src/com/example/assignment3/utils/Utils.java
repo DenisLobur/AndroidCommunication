@@ -3,6 +3,7 @@ package com.example.assignment3.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.os.IBinder;
+import android.os.StrictMode;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 import com.example.assignment3.aidl.WeatherData;
@@ -36,13 +37,16 @@ public class Utils {
         "http://api.openweathermap.org/data/2.5/weather?q=";
 
     /**
-     * Obtain the Acronym information.
+     * Obtain the Weather information.
      * 
-     * @return The information that responds to your current acronym search.
+     * @return The information that responds to your current weather search.
      */
     public static List<WeatherData> getResults(final String acronym) {
         // Create a List that will return the WeatherData obtained
         // from the Acronym Service web service.
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         final List<WeatherData> returnList = 
             new ArrayList<WeatherData>();
             
@@ -55,7 +59,7 @@ public class Utils {
                 new URL(weatherWebServiceURL
                         + acronym);
 
-            // Opens a connection to the Acronym Service.
+            // Opens a connection to the Service.
             HttpURLConnection urlConnection =
                 (HttpURLConnection) url.openConnection();
             
